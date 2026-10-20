@@ -12,6 +12,6 @@
 		constant("USER_DB"),
 		constant("PASS_DB"),
 		constant("NAME_DB")
-	);
+	)
  
 ?>
