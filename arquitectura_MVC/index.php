@@ -2,7 +2,27 @@
 session_start();
 
 require_once __DIR__ . 'arquitectura_MVC/controller/AuthController.php';
-require_once __DIR__ . 'arquitectura_MVC/controller/usuariController';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $usuario = $_POST['usuario'] ?? ''; 
+    $password = $_POST['password'] ?? ''; 
+
+    // authenticator
+    $authController = new AuthController(); 
+
+    // login
+   if ($authController->login($usuario, $password)) {
+    $_SESSION['usuario'] = $usuario; 
+
+    header('Location: arquitectura_MVC/view/perfil.php'); 
+    exit(); 
+
+   } else {
+    $error = "Credencials incorrectos"; 
+   }
+}
+
+require_once __DIR__ . 'arquitectura_MVC/view/login.php'
 
 ?>
 
