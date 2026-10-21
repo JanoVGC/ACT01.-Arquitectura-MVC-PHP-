@@ -21,7 +21,7 @@
             <th>Rol</th>
         </tr>
     </thead>
-    <body> 
+    <tbody> 
         <?php  if (!empty($llistaUsuaris)): ?>
             <?php foreach($llistaUsuaris as $u): ?>
                 <tr>
@@ -35,7 +35,7 @@
                 <?php endforeach; ?>
                 <?php else: ?>
                 <tr>
-                    <td colspan="5">No hi ha usuaris registrats.</td>
+                    <td>No hi ha usuaris registrats.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
