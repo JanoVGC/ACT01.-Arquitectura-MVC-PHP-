@@ -10,20 +10,21 @@ class AuthController {
 
         $usuari = $model->buscarUsuario($usuario); 
 
-        if ($usuari) {
-            if(password_verify($password, $usuari['password_usuario'])) {
+        if ($usuari && password_verify($password, $usuari['password_usuario']) ) {
+                $_SESSION['id'] = $usuari ['id_usuario'];
                 $_SESSION['usuario'] = $usuari['usuario']; 
                 $_SESSION['rol'] = $usuari['rol_usuario'];
 
                 return true; 
             }
-        }
+        
 
         return false; 
 
 
     }
 }
+
      
 
 ?>

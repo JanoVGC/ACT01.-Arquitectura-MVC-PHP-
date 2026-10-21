@@ -14,6 +14,18 @@ require_once __DIR__ . '/arquitectura_MVC/model/conexion.php';
 
             return $resultat->fetch_array();
         }
+
+        public function existeEmail ($email, $usuario = '') {
+            global $conexion;             
+
+
+            $sql = "SELECT 1 FROM usuarios
+                    WHERE email_usuario = '$email' AND usuario <> '$usuario'";
+                    
+                    $resultat = $conexion->query($sql);
+
+                    return $resultat->num_rows > 0; 
+        }
         
         public function crearUsuario($usuario, $nombre, $apellido, $email, $password, $rol) {
             global $conexion; 
@@ -28,16 +40,19 @@ require_once __DIR__ . '/arquitectura_MVC/model/conexion.php';
             global $conexion; 
 
             $sql = "SELECT usuario, nombre_usuario, apellido_usuario, email_usuario, password_usuario, rol_usuario 
-                    FROM usuarios"; 
+                    FROM usuarios
+                    ORDER BY usuario";
 
-                    return $conexion->query($sql); 
+                    $resultat = $conexion->query($sql);
+
+                    return $resultat->fetch_all(MYSQLI_ASSOC);
         }
 
         public function modificarEmail($usuario , $email) {
             global $conexion; 
 
             $sql = "UPDATE usuarios
-                    SET emial_usuario = '$email'
+                    SET emaIl_usuario = '$email'
                     WHERE usuario = '$usuario'"; 
 
                     return $conexion->query($sql); 
