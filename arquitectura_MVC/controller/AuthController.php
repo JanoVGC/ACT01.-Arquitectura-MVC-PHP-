@@ -1,30 +1,29 @@
 <?php
 
-require_once __DIR__ . '/arquitectura_MVC/model/usuari.php';
+require_once __DIR__ . '/../model/usuari.php';
 
 class AuthController {
 
     public function login($usuario, $password) {
 
-        $model = new Usuari(); 
+        // Mateixa validació que al registre
+        $longitud = strlen($usuario);
 
-        $usuari = $model->buscarUsuario($usuario); 
+        if ($longitud < 3 || $longitud > 50 || !ctype_alnum(str_replace('_', '', $usuario))) {
+            return false;
+        }
 
-        if ($usuari && password_verify($password, $usuari['password_usuario']) ) {
-                $_SESSION['id'] = $usuari ['id_usuario'];
-                $_SESSION['usuario'] = $usuari['usuario']; 
-                $_SESSION['rol'] = $usuari['rol_usuario'];
+        $model  = new Usuari();
+        $usuari = $model->buscarUsuario($usuario);
 
-                return true; 
-            }
-        
+        if ($usuari && password_verify($password, $usuari['password_usuario'])) {
+            $_SESSION['id']      = $usuari['id_usuario'];
+            $_SESSION['usuario'] = $usuari['usuario'];
+            $_SESSION['rol']     = $usuari['rol_usuario'];
 
-        return false; 
+            return true;
+        }
 
-
+        return false;
     }
 }
-
-     
-
-?>

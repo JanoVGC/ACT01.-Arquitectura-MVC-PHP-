@@ -1,41 +1,44 @@
+<?php
+$llistaUsuaris = $llistaUsuaris ?? [];
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panell del admin</title>
+    <title>Panell de l'admin</title>
 </head>
 <body>
-    <h1>Panell del admin</h1>
+    <h1>Panell de l'admin</h1>
 
-    <a href="">Tancar sessió</a>
+    <a href="index.php?accion=logout">Tancar sessió</a>
 
-    <h2>Llista d'Usuaris Registrats:</h2>
+    <h2>Llista d'usuaris registrats:</h2>
 
-    <thead>
-        <tr>
-            <th>Usuario</th>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Email</th>
-            <th>Rol</th>
-        </tr>
-    </thead>
-    <tbody> 
-        <?php  if (!empty($llistaUsuaris)): ?>
-            <?php foreach($llistaUsuaris as $u): ?>
-                <tr>
-                    <td><?= htmlspecialchars($u['usuario']) ?></td>
+    <table>
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($llistaUsuaris)): ?>
+                <?php foreach ($llistaUsuaris as $u): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($u['usuario']) ?></td>
                         <td><?= htmlspecialchars($u['nombre_usuario']) ?></td>
                         <td><?= htmlspecialchars($u['apellido_usuario']) ?></td>
                         <td><?= htmlspecialchars($u['email_usuario']) ?></td>
                         <td><?= htmlspecialchars($u['rol_usuario']) ?></td>
-
-                </tr>
+                    </tr>
                 <?php endforeach; ?>
-                <?php else: ?>
+            <?php else: ?>
                 <tr>
-                    <td>No hi ha usuaris registrats.</td>
+                    <td colspan="5">No hi ha usuaris registrats.</td>
                 </tr>
             <?php endif; ?>
         </tbody>

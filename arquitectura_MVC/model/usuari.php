@@ -19,8 +19,9 @@ require_once __DIR__ . '/arquitectura_MVC/model/conexion.php';
             global $conexion;             
 
 
-            $sql = "SELECT 1 FROM usuarios
-                    WHERE email_usuario = '$email' AND usuario <> '$usuario'";
+            $sql = "SELECT usuario, nombre_usuario, apellido_usuario, email_usuario, rol_usuario
+                    FROM usuarios
+                    ORDER BY usuario";;
                     
                     $resultat = $conexion->query($sql);
 
